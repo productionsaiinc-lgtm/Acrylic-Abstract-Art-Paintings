@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Showcase gallery of acrylic abstract art paintings.">
+    <title>Showcase | Acrylic Abstract Art Paintings</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Acrylic Abstract Art Paintings home">
+        <span class="brand-mark"></span>
+        <span>Acrylic Abstract Art Paintings</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html#gallery">Gallery</a>
+        <a href="showcase.html">Showcase</a>
+        <a href="index.html#shipping">Shipping</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="showcase-title">
+        <div class="hero-media" aria-hidden="true">
+          <img src="gallery/20260523_133512.jpg" alt="">
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">Showcase only</p>
+          <h1 id="showcase-title">Painting Showcase</h1>
+          <p>
+            A visual-only look through the acrylic abstract collection. Use this page for sharing
+            the work without price or checkout details.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#showcaseGrid">View showcase</a>
+            <a class="button secondary" href="index.html#contact">Ask about availability</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="showcase-gallery-title">
+        <div class="section-heading">
+          <p class="eyebrow">Artwork archive</p>
+          <h2 id="showcase-gallery-title">Showcase Gallery</h2>
+          <p>These images are presented for browsing and portfolio sharing only.</p>
+        </div>
+        <div class="gallery-grid showcase-grid" id="showcaseGrid"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Acrylic Abstract Art Paintings</span>
+      <span><a href="index.html">Return to storefront</a></span>
+    </footer>
+
+    <dialog class="art-modal" id="showcaseModal">
+      <button class="modal-close" type="button" data-close aria-label="Close artwork preview">×</button>
+      <div class="modal-layout">
+        <img id="showcaseModalImage" alt="">
+        <div class="modal-info">
+          <p class="eyebrow" id="showcaseModalStatus"></p>
+          <h2 id="showcaseModalTitle"></h2>
+          <p id="showcaseModalDescription"></p>
+          <a class="button primary" href="index.html#contact">Ask about this artwork</a>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="showcase.js"></script>
+  </body>
+</html>

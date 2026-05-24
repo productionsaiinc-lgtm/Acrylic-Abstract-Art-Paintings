@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Original acrylic abstract art paintings available for purchase and custom commissions.">
+    <title>Acrylic Abstract Art Paintings</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Acrylic Abstract Art Paintings home">
+        <span class="brand-mark"></span>
+        <span>Acrylic Abstract Art Paintings</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#gallery">Gallery</a>
+        <a href="showcase.html">Showcase</a>
+        <a href="#shipping">Shipping</a>
+        <a href="#commissions">Commissions</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-media" aria-hidden="true">
+          <img src="gallery/20260523_133906.jpg" alt="">
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">Original acrylic work</p>
+          <h1 id="hero-title">Acrylic Abstract Art Paintings</h1>
+          <p>
+            One-of-a-kind textured, poured, and hand-finished acrylic pieces made for collectors,
+            gifts, statement walls, and custom color requests.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#gallery">View paintings</a>
+            <a class="button secondary" href="#contact">Ask about a piece</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro-band" aria-label="Buying options">
+        <div>
+          <strong>Prices coming soon</strong>
+          <span>Each artwork can be reserved by request until final prices are posted.</span>
+        </div>
+        <div>
+          <strong>PayPal ready</strong>
+          <span>Checkout links are prepared in the code for fast updates.</span>
+        </div>
+        <div>
+          <strong>Custom work</strong>
+          <span>Send colors, size, theme, and deadline for a commissioned painting.</span>
+        </div>
+      </section>
+
+      <section class="section" id="gallery" aria-labelledby="gallery-title">
+        <div class="section-heading">
+          <p class="eyebrow">Available collection</p>
+          <h2 id="gallery-title">Current Paintings</h2>
+          <p>Browse the latest acrylic abstract pieces. Select any painting for a larger view and inquiry options.</p>
+        </div>
+        <div class="toolbar" aria-label="Gallery filters">
+          <button class="filter-button active" type="button" data-filter="all">All</button>
+          <button class="filter-button" type="button" data-filter="fluid">Fluid abstract</button>
+          <button class="filter-button" type="button" data-filter="floral">Floral inspired</button>
+          <button class="filter-button" type="button" data-filter="statement">Statement pieces</button>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+      </section>
+
+      <section class="feature-band" id="commissions" aria-labelledby="commissions-title">
+        <div>
+          <p class="eyebrow">Made to your liking</p>
+          <h2 id="commissions-title">Custom Acrylic Abstract Paintings</h2>
+        </div>
+        <div class="feature-copy">
+          <p>
+            Commission requests can be built around favorite colors, room style, canvas size,
+            metallic accents, floral motion, pour patterns, or bold abstract energy.
+          </p>
+          <a class="button primary" href="#contact">Start a custom request</a>
+        </div>
+      </section>
+
+      <section class="section shipping-section" id="shipping" aria-labelledby="shipping-title">
+        <div class="section-heading">
+          <p class="eyebrow">Shipping rates</p>
+          <h2 id="shipping-title">Shipping And Delivery</h2>
+          <p>Flat-rate shipping is ready for U.S. buyers. Oversized work and international orders can be quoted before payment.</p>
+        </div>
+        <div class="shipping-grid">
+          <article>
+            <h3>Small paintings</h3>
+            <p>Up to 12 x 12 inches</p>
+            <strong>$10</strong>
+          </article>
+          <article>
+            <h3>Medium paintings</h3>
+            <p>Up to 18 x 24 inches</p>
+            <strong>$18</strong>
+          </article>
+          <article>
+            <h3>Large paintings</h3>
+            <p>Up to 24 x 36 inches</p>
+            <strong>$35</strong>
+          </article>
+          <article>
+            <h3>Oversized or international</h3>
+            <p>Quoted before checkout</p>
+            <strong>Quote</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="section-heading">
+          <p class="eyebrow">Purchase or commission</p>
+          <h2 id="contact-title">Contact</h2>
+          <p>Use the form to ask about a painting, request a price, or start a custom order.</p>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <label>
+            Name
+            <input name="name" autocomplete="name" required>
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" autocomplete="email" required>
+          </label>
+          <label>
+            Interested in
+            <select name="interest" id="interestSelect">
+              <option value="A painting from the gallery">A painting from the gallery</option>
+              <option value="Custom acrylic painting">Custom acrylic painting</option>
+              <option value="PayPal purchase">PayPal purchase</option>
+            </select>
+          </label>
+          <label class="full-field">
+            Message
+            <textarea name="message" rows="5" required placeholder="Tell me the painting number, size, colors, or custom idea."></textarea>
+          </label>
+          <button class="button primary" type="submit">Send inquiry</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Acrylic Abstract Art Paintings</span>
+      <span>Original acrylic paintings and custom orders</span>
+    </footer>
+
+    <dialog class="art-modal" id="artModal">
+      <button class="modal-close" type="button" data-close aria-label="Close artwork preview">×</button>
+      <div class="modal-layout">
+        <img id="modalImage" alt="">
+        <div class="modal-info">
+          <p class="eyebrow" id="modalStatus"></p>
+          <h2 id="modalTitle"></h2>
+          <p id="modalDescription"></p>
+          <dl>
+            <div>
+              <dt>Size</dt>
+              <dd id="modalSize"></dd>
+            </div>
+            <div>
+              <dt>Price</dt>
+              <dd id="modalPrice"></dd>
+            </div>
+          </dl>
+          <div class="modal-actions">
+            <a class="button primary" id="modalInquiry" href="#contact">Ask about this painting</a>
+            <a class="button secondary" id="modalPaypal" href="#" target="_blank" rel="noreferrer">Pay with PayPal</a>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>

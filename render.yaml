@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: acrylic-abstract-art-paintings
+    runtime: static
+    repo: https://github.com/productionsaiinc-lgtm/Acrylic-Abstract-Art-Paintings.git
+    branch: main
+    buildCommand: "true"
+    staticPublishPath: .
+    previews:
+      generation: automatic
+    domains:
+      - acrylicabstractart.com
