@@ -50,7 +50,7 @@ This repo includes `render.yaml` for a Render Static Site.
 
 1. In Render, create a new Blueprint from this GitHub repo.
 2. Render will publish the site from the repo root with no build command.
-3. In Render's custom domain settings, replace `acrylicabstractart.com` with your real domain if different.
-4. Add the DNS records Render gives you at your domain registrar.
+3. Use the assigned Render URL for the live site:
+   `https://acrylic-abstract-art-paintings.onrender.com`
 
-The domain in `render.yaml` is a placeholder and should be changed before production if you have a different domain.
+Shopify can be used for the storefront and shipping when you are ready to connect products and checkout.

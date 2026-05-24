@@ -8,5 +8,3 @@ services:
     staticPublishPath: .
     previews:
       generation: automatic
-    domains:
-      - acrylicabstractart.com
