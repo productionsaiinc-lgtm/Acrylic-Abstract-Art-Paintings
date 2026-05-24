@@ -166,6 +166,23 @@ function paypalUrl(artwork) {
   return `https://www.paypal.com/cgi-bin/webscr?${params.toString()}`;
 }
 
+function paypalButtonText(artwork) {
+  return paypalUrl(artwork) ? "Pay with PayPal" : "Request PayPal invoice";
+}
+
+function startArtworkInquiry(artwork, message) {
+  document.querySelector("#interestSelect").value = "A painting from the gallery";
+  contactForm.elements.message.value = message;
+  contactForm.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function startPaypalInvoice(artwork) {
+  startArtworkInquiry(
+    artwork,
+    `I would like to buy ${artwork.id} - ${artwork.title} through PayPal. Please send the price and PayPal invoice details.`
+  );
+}
+
 function renderGallery(filter = "all") {
   galleryGrid.innerHTML = "";
   const visibleArt = artworks.filter((artwork) => filter === "all" || artwork.category === filter);
@@ -174,21 +191,27 @@ function renderGallery(filter = "all") {
     const card = document.createElement("article");
     card.className = "art-card";
     card.innerHTML = `
-      <button type="button" aria-label="View ${artwork.title}" data-art-id="${artwork.id}">
+      <button class="art-preview" type="button" aria-label="View ${artwork.title}" data-art-id="${artwork.id}">
         <picture>
           <img src="${artwork.image}" alt="${artwork.title}" loading="lazy">
         </picture>
-        <span class="art-card-body">
-          <span class="card-meta">
-            <span class="status-pill">${artwork.status}</span>
-            <span>${artwork.id}</span>
-          </span>
-          <span>
-            <h3>${artwork.title}</h3>
-            <p>${formatPrice(artwork.price)}</p>
-          </span>
-        </span>
       </button>
+      <div class="art-card-body">
+        <div class="card-meta">
+          <span class="status-pill">${artwork.status}</span>
+          <span>${artwork.id}</span>
+        </div>
+        <div>
+          <h3>${artwork.title}</h3>
+          <p>${formatPrice(artwork.price)}</p>
+        </div>
+        <div class="card-actions">
+          <button class="card-action" type="button" data-art-id="${artwork.id}">View</button>
+          <button class="card-action paypal-action" type="button" data-paypal-id="${artwork.id}">
+            ${paypalButtonText(artwork)}
+          </button>
+        </div>
+      </div>
     `;
     galleryGrid.append(card);
   });
@@ -208,18 +231,37 @@ function openModal(artwork) {
   const paypalButton = document.querySelector("#modalPaypal");
   inquiry.href = `#contact`;
   inquiry.dataset.artId = artwork.id;
+  paypalButton.dataset.artId = artwork.id;
 
   if (paypal) {
     paypalButton.href = paypal;
+    paypalButton.textContent = "Pay with PayPal";
+    paypalButton.target = "_blank";
     paypalButton.classList.remove("is-hidden");
   } else {
-    paypalButton.classList.add("is-hidden");
+    paypalButton.href = "#contact";
+    paypalButton.textContent = "Request PayPal invoice";
+    paypalButton.removeAttribute("target");
+    paypalButton.classList.remove("is-hidden");
   }
 
   modal.showModal();
 }
 
 galleryGrid.addEventListener("click", (event) => {
+  const paypalButton = event.target.closest("[data-paypal-id]");
+  if (paypalButton) {
+    const artwork = artworks.find((item) => item.id === paypalButton.dataset.paypalId);
+    if (!artwork) return;
+    const paypal = paypalUrl(artwork);
+    if (paypal) {
+      window.open(paypal, "_blank", "noopener");
+      return;
+    }
+    startPaypalInvoice(artwork);
+    return;
+  }
+
   const button = event.target.closest("[data-art-id]");
   if (!button) return;
   const artwork = artworks.find((item) => item.id === button.dataset.artId);
@@ -243,9 +285,19 @@ modal.addEventListener("click", (event) => {
 document.querySelector("#modalInquiry").addEventListener("click", (event) => {
   const artwork = artworks.find((item) => item.id === event.currentTarget.dataset.artId);
   if (!artwork) return;
-  document.querySelector("#interestSelect").value = "A painting from the gallery";
-  contactForm.elements.message.value = `I am interested in ${artwork.id} - ${artwork.title}. Please send the price and PayPal payment details.`;
   modal.close();
+  startArtworkInquiry(
+    artwork,
+    `I am interested in ${artwork.id} - ${artwork.title}. Please send the price and PayPal payment details.`
+  );
+});
+
+document.querySelector("#modalPaypal").addEventListener("click", (event) => {
+  const artwork = artworks.find((item) => item.id === event.currentTarget.dataset.artId);
+  if (!artwork || paypalUrl(artwork)) return;
+  event.preventDefault();
+  modal.close();
+  startPaypalInvoice(artwork);
 });
 
 contactForm.addEventListener("submit", (event) => {

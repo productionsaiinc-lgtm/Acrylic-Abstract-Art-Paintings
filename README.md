@@ -32,6 +32,8 @@ price: 125,
 
 Once a painting has a price and the PayPal email is updated, the PayPal button appears in the artwork preview.
 
+Each artwork card includes a PayPal action. While prices or the PayPal business email are missing, the button starts a PayPal invoice request through the contact form. After `price` and `paypalBusinessEmail` are filled in, the same button opens PayPal checkout for that artwork.
+
 ## Shipping Rates
 
 The storefront currently shows Canada Post flat-rate box prices in CAD:

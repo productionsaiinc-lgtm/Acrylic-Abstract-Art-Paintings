@@ -295,7 +295,7 @@ dd {
   box-shadow: 0 14px 34px rgba(45, 31, 23, 0.08);
 }
 
-.art-card button {
+.art-preview {
   display: grid;
   width: 100%;
   padding: 0;
@@ -319,7 +319,7 @@ dd {
   transition: transform 260ms ease;
 }
 
-.art-card button:hover img {
+.art-preview:hover img {
   transform: scale(1.04);
 }
 
@@ -334,6 +334,38 @@ dd {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
+}
+
+.card-actions {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 0.55rem;
+}
+
+.card-action {
+  min-height: 2.45rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+  color: var(--ink);
+  background: var(--paper);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.card-action:hover {
+  border-color: var(--charcoal);
+}
+
+.paypal-action {
+  color: #fffaf3;
+  background: #263b80;
+  border-color: #263b80;
+}
+
+.paypal-action:hover {
+  background: #172a63;
+  border-color: #172a63;
 }
 
 .status-pill {
