@@ -20,7 +20,7 @@ Open `app.js` and change the values at the top:
 const seller = {
   email: "your-email@example.com",
   paypalBusinessEmail: "your-paypal-email@example.com",
-  currency: "USD",
+  currency: "CAD",
 };
 ```
 
@@ -34,12 +34,15 @@ Once a painting has a price and the PayPal email is updated, the PayPal button a
 
 ## Shipping Rates
 
-The storefront currently shows these editable flat rates:
+The storefront currently shows Canada Post flat-rate box prices in CAD:
 
-- Small paintings, up to 12 x 12 inches: `$10`
-- Medium paintings, up to 18 x 24 inches: `$18`
-- Large paintings, up to 24 x 36 inches: `$35`
-- Oversized or international orders: quoted before checkout
+- Extra small box, up to 5 kg: `$18.99 CAD`
+- Small box, up to 5 kg: `$21.99 CAD`
+- Medium box, up to 5 kg: `$24.99 CAD`
+- Large box, up to 5 kg: `$32.99 CAD`
+- Oversized, extra-insured, or international orders: quoted before checkout
+
+Source: Canada Post flat rate box pricing.
 
 ## Deploy On Render
 

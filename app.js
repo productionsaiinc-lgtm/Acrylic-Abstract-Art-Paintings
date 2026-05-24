@@ -1,7 +1,7 @@
 const seller = {
   email: "your-email@example.com",
   paypalBusinessEmail: "your-paypal-email@example.com",
-  currency: "USD",
+  currency: "CAD",
 };
 
 const artImages = [
