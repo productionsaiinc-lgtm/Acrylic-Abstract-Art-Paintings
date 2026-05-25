@@ -359,17 +359,8 @@ contactForm.addEventListener("submit", async (event) => {
     formStatus.className = "form-status success";
     formStatus.textContent = "Thanks, your inquiry has been sent.";
   } catch (error) {
-    const replyToInput = document.createElement("input");
-    replyToInput.type = "hidden";
-    replyToInput.name = "_replyto";
-    replyToInput.value = formData.get("email");
-    contactForm.append(replyToInput);
-
-    formStatus.className = "form-status";
-    formStatus.textContent = "Finishing your inquiry through the secure form page...";
-    submitButton.textContent = "Redirecting...";
-    window.setTimeout(() => HTMLFormElement.prototype.submit.call(contactForm), 500);
-    return;
+    formStatus.className = "form-status error";
+    formStatus.textContent = "The inquiry service is temporarily unavailable. Please use PayPal checkout or email mel.cormier@mail.com directly.";
   }
 
   submitButton.disabled = false;
