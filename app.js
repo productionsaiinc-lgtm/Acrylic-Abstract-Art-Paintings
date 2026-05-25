@@ -330,10 +330,11 @@ contactForm.addEventListener("submit", (event) => {
     interest: formData.get("interest"),
     message: formData.get("message"),
     _subject: formData.get("_subject"),
-    _template: "table",
+    _template: formData.get("_template") || "table",
+    _captcha: formData.get("_captcha") || "false",
   };
 
-  fetch(`https://formsubmit.co/ajax/${seller.email}`, {
+  fetch(`https://formsubmit.co/ajax/${encodeURIComponent(seller.email)}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -351,8 +352,9 @@ contactForm.addEventListener("submit", (event) => {
       formStatus.textContent = "Inquiry sent. I will reply by email.";
     })
     .catch(() => {
-      formStatus.className = "form-status error";
-      formStatus.textContent = "The form could not send. Please email mel.cormier@mail.com directly.";
+      formStatus.className = "form-status";
+      formStatus.textContent = "Opening secure enquiry form...";
+      contactForm.submit();
     })
     .finally(() => {
       submitButton.disabled = false;
