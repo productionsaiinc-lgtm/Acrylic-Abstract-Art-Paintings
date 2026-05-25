@@ -17,7 +17,6 @@ const artImages = [
   "20260523_133548.jpg",
   "20260523_133551.jpg",
   "20260523_133601.jpg",
-  "20260523_133617.jpg",
   "20260523_133618.jpg",
   "20260523_133628.jpg",
   "20260523_133634.jpg",
@@ -74,7 +73,6 @@ const titles = [
   "Pink Edge",
   "Petal Light",
   "Midnight Petals",
-  "Fluid Garnet Detail",
   "Copper Cell Study",
   "Rose Pour Detail",
   "Rose Current",
@@ -118,11 +116,17 @@ const titles = [
   "Garden Accent Detail",
 ];
 
-const categories = ["floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "statement", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "statement", "fluid", "fluid", "fluid", "fluid", "statement", "fluid", "fluid", "fluid", "statement", "fluid", "fluid", "fluid", "fluid", "statement", "statement", "fluid", "fluid", "statement", "fluid", "fluid", "statement", "fluid", "fluid", "fluid", "floral", "floral", "floral", "floral", "floral"];
+const categories = [
+  "floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral",
+  "statement", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid",
+  "fluid", "fluid", "statement", "fluid", "fluid", "fluid", "fluid", "statement", "fluid", "fluid", "fluid", "statement",
+  "fluid", "fluid", "fluid", "fluid", "statement", "statement", "fluid", "fluid", "statement", "fluid", "fluid", "statement",
+  "fluid", "fluid", "floral", "floral", "floral",
+];
 
 const prices = [
   149, 99, 99, 125, 125, 125, 99, 125, 149, 99, 99, 149,
-  299, 149, 149, 179, 199, 179, 179, 199, 149, 149, 179, 149,
+  299, 149, 179, 199, 179, 179, 199, 149, 149, 179, 149,
   199, 149, 249, 299, 149, 199, 225, 199, 299, 179, 179, 249,
   329, 179, 225, 199, 149, 349, 249, 199, 179, 299, 179, 199,
   349, 179, 199, 149, 149, 125,
