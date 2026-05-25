@@ -24,10 +24,12 @@ const seller = {
 };
 ```
 
-To add prices, set the `price` field for an artwork from `null` to a number:
+To adjust prices, edit the `prices` array in `app.js`. Prices are in CAD:
 
 ```js
-price: 125,
+const prices = [
+  149, 99, 99, 125
+];
 ```
 
 Once a painting has a price and the PayPal email is updated, the PayPal button appears in the artwork preview.

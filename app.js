@@ -120,6 +120,14 @@ const titles = [
 
 const categories = ["floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "floral", "statement", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "fluid", "statement", "fluid", "fluid", "fluid", "fluid", "statement", "fluid", "fluid", "fluid", "statement", "fluid", "fluid", "fluid", "fluid", "statement", "statement", "fluid", "fluid", "statement", "fluid", "fluid", "statement", "fluid", "fluid", "fluid", "floral", "floral", "floral", "floral", "floral"];
 
+const prices = [
+  149, 99, 99, 125, 125, 125, 99, 125, 149, 99, 99, 149,
+  299, 149, 149, 179, 199, 179, 179, 199, 149, 149, 179, 149,
+  199, 149, 249, 299, 149, 199, 225, 199, 299, 179, 179, 249,
+  329, 179, 225, 199, 149, 349, 249, 199, 179, 299, 179, 199,
+  349, 179, 199, 149, 149, 125,
+];
+
 const descriptions = {
   floral: "Floral-inspired acrylic abstract with layered brush texture, soft motion, and decorative wall-art presence.",
   fluid: "Fluid acrylic abstract with marbled cells, organic movement, and layered color transitions.",
@@ -134,7 +142,7 @@ const artworks = artImages.map((fileName, index) => {
     image: `gallery/${fileName}`,
     category,
     size: "Size to be confirmed",
-    price: null,
+    price: prices[index] || 149,
     status: "Available",
     description: descriptions[category],
   };
