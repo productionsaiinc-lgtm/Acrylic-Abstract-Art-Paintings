@@ -7,7 +7,7 @@ Static storefront for original acrylic abstract paintings and custom commission 
 - `index.html` - page structure and artwork sections
 - `showcase.html` - showcase-only page without prices or checkout controls
 - `styles.css` - responsive visual design
-- `app.js` - gallery data, filters, inquiry form, shipping section, and PayPal link generation
+- `app.js` - gallery data, filters, inquiry form, and PayPal link generation
 - `showcase.js` - visual-only showcase gallery data
 - `gallery/` - optimized painting photos used by the deployed site
 - `art/` - local original photos, ignored by Git because they are large
@@ -38,17 +38,9 @@ Each artwork card includes a PayPal action. While prices or the PayPal business 
 
 The contact form sends through FormSubmit AJAX instead of opening the visitor's email app. The first live submission may require confirming an activation email sent to `mel.cormier@mail.com`.
 
-## Shipping Rates
+## Shipping
 
-The storefront currently shows Canada Post flat-rate box prices in CAD:
-
-- Extra small box, up to 5 kg: `$18.99 CAD`
-- Small box, up to 5 kg: `$21.99 CAD`
-- Medium box, up to 5 kg: `$24.99 CAD`
-- Large box, up to 5 kg: `$32.99 CAD`
-- Oversized, extra-insured, or international orders: quoted before checkout
-
-Source: Canada Post flat rate box pricing.
+The storefront states that listed artwork prices include standard Canada-wide shipping.
 
 ## Deploy On Render
 

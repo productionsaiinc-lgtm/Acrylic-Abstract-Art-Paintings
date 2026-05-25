@@ -192,7 +192,7 @@ function startArtworkInquiry(artwork, message) {
 function startPaypalInvoice(artwork) {
   startArtworkInquiry(
     artwork,
-    `I would like to buy ${artwork.id} - ${artwork.title} through PayPal. Please send the price and PayPal invoice details.`
+    `I would like to buy ${artwork.id} - ${artwork.title} through PayPal. Please send the PayPal invoice details.`
   );
 }
 
@@ -301,7 +301,7 @@ document.querySelector("#modalInquiry").addEventListener("click", (event) => {
   modal.close();
   startArtworkInquiry(
     artwork,
-    `I am interested in ${artwork.id} - ${artwork.title}. Please send the price and PayPal payment details.`
+    `I am interested in ${artwork.id} - ${artwork.title}. Please confirm availability and PayPal payment details.`
   );
 });
 
