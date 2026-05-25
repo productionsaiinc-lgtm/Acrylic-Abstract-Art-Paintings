@@ -4,6 +4,8 @@ const seller = {
   currency: "CAD",
 };
 
+const inquiryEndpoint = `https://formsubmit.co/ajax/${seller.email}`;
+
 const artImages = [
   "20260523_133512.jpg",
   "20260523_133515.jpg",
@@ -175,12 +177,15 @@ function paypalUrl(artwork) {
     item_name: `${artwork.id} - ${artwork.title}`,
     amount: String(artwork.price),
     currency_code: seller.currency,
+    landing_page: "Billing",
+    solution_type: "Sole",
+    useraction: "commit",
   });
   return `https://www.paypal.com/cgi-bin/webscr?${params.toString()}`;
 }
 
 function paypalButtonText(artwork) {
-  return paypalUrl(artwork) ? "Pay with PayPal" : "Request PayPal invoice";
+  return paypalUrl(artwork) ? "Pay with PayPal or card" : "Request PayPal invoice";
 }
 
 function startArtworkInquiry(artwork, message) {
@@ -248,7 +253,7 @@ function openModal(artwork) {
 
   if (paypal) {
     paypalButton.href = paypal;
-    paypalButton.textContent = "Pay with PayPal";
+    paypalButton.textContent = "Pay with PayPal or card";
     paypalButton.target = "_blank";
     paypalButton.classList.remove("is-hidden");
   } else {
@@ -313,31 +318,46 @@ document.querySelector("#modalPaypal").addEventListener("click", (event) => {
   startPaypalInvoice(artwork);
 });
 
-contactForm.addEventListener("submit", (event) => {
+contactForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const formData = new FormData(contactForm);
   const submitButton = contactForm.querySelector("button[type='submit']");
+  const defaultButtonText = submitButton.textContent;
 
   if (formData.get("_honey")) return;
 
   formStatus.className = "form-status";
-  formStatus.textContent = "Opening your email app...";
+  formStatus.textContent = "Sending your inquiry...";
   submitButton.disabled = true;
+  submitButton.textContent = "Sending...";
 
-  const subject = formData.get("_subject") || "Acrylic abstract painting inquiry";
-  const body = [
-    `Name: ${formData.get("name")}`,
-    `Email: ${formData.get("email")}`,
-    `Interested in: ${formData.get("interest")}`,
-    "",
-    formData.get("message"),
-  ].join("\n");
-  const params = new URLSearchParams({ subject, body });
+  formData.set("_replyto", formData.get("email"));
+  formData.set("_template", "table");
+  formData.set("_captcha", "false");
 
-  window.location.href = `mailto:${seller.email}?${params.toString()}`;
-  formStatus.className = "form-status success";
-  formStatus.textContent = "Your email app should open with the inquiry ready to send.";
-  submitButton.disabled = false;
+  try {
+    const response = await fetch(inquiryEndpoint, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Inquiry submission failed");
+    }
+
+    contactForm.reset();
+    formStatus.className = "form-status success";
+    formStatus.textContent = "Thanks, your inquiry has been sent.";
+  } catch (error) {
+    formStatus.className = "form-status error";
+    formStatus.textContent = "The inquiry could not be sent. Please try again or email directly.";
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = defaultButtonText;
+  }
 });
 
 renderGallery();
