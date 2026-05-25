@@ -321,44 +321,23 @@ contactForm.addEventListener("submit", (event) => {
   if (formData.get("_honey")) return;
 
   formStatus.className = "form-status";
-  formStatus.textContent = "Sending inquiry...";
+  formStatus.textContent = "Opening your email app...";
   submitButton.disabled = true;
 
-  const payload = {
-    name: formData.get("name"),
-    email: formData.get("email"),
-    interest: formData.get("interest"),
-    message: formData.get("message"),
-    _subject: formData.get("_subject"),
-    _template: formData.get("_template") || "table",
-    _captcha: formData.get("_captcha") || "false",
-  };
+  const subject = formData.get("_subject") || "Acrylic abstract painting inquiry";
+  const body = [
+    `Name: ${formData.get("name")}`,
+    `Email: ${formData.get("email")}`,
+    `Interested in: ${formData.get("interest")}`,
+    "",
+    formData.get("message"),
+  ].join("\n");
+  const params = new URLSearchParams({ subject, body });
 
-  fetch(`https://formsubmit.co/ajax/${encodeURIComponent(seller.email)}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify(payload),
-  })
-    .then((response) => {
-      if (!response.ok) throw new Error("Form submission failed");
-      return response.json();
-    })
-    .then(() => {
-      contactForm.reset();
-      formStatus.className = "form-status success";
-      formStatus.textContent = "Inquiry sent. I will reply by email.";
-    })
-    .catch(() => {
-      formStatus.className = "form-status";
-      formStatus.textContent = "Opening secure enquiry form...";
-      contactForm.submit();
-    })
-    .finally(() => {
-      submitButton.disabled = false;
-    });
+  window.location.href = `mailto:${seller.email}?${params.toString()}`;
+  formStatus.className = "form-status success";
+  formStatus.textContent = "Your email app should open with the inquiry ready to send.";
+  submitButton.disabled = false;
 });
 
 renderGallery();
