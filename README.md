@@ -18,8 +18,8 @@ Open `app.js` and change the values at the top:
 
 ```js
 const seller = {
-  email: "your-email@example.com",
-  paypalBusinessEmail: "your-paypal-email@example.com",
+  email: "mel.cormier@mail.com",
+  paypalBusinessEmail: "mel.cormier@mail.com",
   currency: "CAD",
 };
 ```
