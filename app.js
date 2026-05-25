@@ -183,7 +183,7 @@ function paypalUrl(artwork) {
 }
 
 function paypalButtonText(artwork) {
-  return paypalUrl(artwork) ? "Pay with PayPal or card" : "Request PayPal invoice";
+  return paypalUrl(artwork) ? "Paypal/Visa/Mastercard" : "Request PayPal invoice";
 }
 
 function startArtworkInquiry(artwork, message) {
@@ -251,7 +251,7 @@ function openModal(artwork) {
 
   if (paypal) {
     paypalButton.href = paypal;
-    paypalButton.textContent = "Pay with PayPal or card";
+    paypalButton.textContent = "Paypal/Visa/Mastercard";
     paypalButton.target = "_blank";
     paypalButton.classList.remove("is-hidden");
   } else {
