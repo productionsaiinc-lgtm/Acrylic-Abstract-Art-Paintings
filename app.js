@@ -201,6 +201,15 @@ function startPaypalInvoice(artwork) {
   );
 }
 
+async function formSubmitErrorMessage(response) {
+  try {
+    const data = await response.json();
+    return data.message || data.error || "Inquiry submission failed";
+  } catch (error) {
+    return "Inquiry submission failed";
+  }
+}
+
 function renderGallery(filter = "all") {
   galleryGrid.innerHTML = "";
   const visibleArt = artworks.filter((artwork) => filter === "all" || artwork.category === filter);
@@ -332,8 +341,6 @@ contactForm.addEventListener("submit", async (event) => {
   submitButton.textContent = "Sending...";
 
   formData.set("_replyto", formData.get("email"));
-  formData.set("_template", "table");
-  formData.set("_captcha", "false");
 
   try {
     const response = await fetch(inquiryEndpoint, {
@@ -345,19 +352,28 @@ contactForm.addEventListener("submit", async (event) => {
     });
 
     if (!response.ok) {
-      throw new Error("Inquiry submission failed");
+      throw new Error(await formSubmitErrorMessage(response));
     }
 
     contactForm.reset();
     formStatus.className = "form-status success";
     formStatus.textContent = "Thanks, your inquiry has been sent.";
   } catch (error) {
-    formStatus.className = "form-status error";
-    formStatus.textContent = "The inquiry could not be sent. Please try again or email directly.";
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = defaultButtonText;
+    const replyToInput = document.createElement("input");
+    replyToInput.type = "hidden";
+    replyToInput.name = "_replyto";
+    replyToInput.value = formData.get("email");
+    contactForm.append(replyToInput);
+
+    formStatus.className = "form-status";
+    formStatus.textContent = "Finishing your inquiry through the secure form page...";
+    submitButton.textContent = "Redirecting...";
+    window.setTimeout(() => HTMLFormElement.prototype.submit.call(contactForm), 500);
+    return;
   }
+
+  submitButton.disabled = false;
+  submitButton.textContent = defaultButtonText;
 });
 
 renderGallery();
