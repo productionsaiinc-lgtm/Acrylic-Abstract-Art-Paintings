@@ -36,6 +36,8 @@ Once a painting has a price and the PayPal email is updated, the PayPal button a
 
 Each artwork card includes a PayPal action. While prices or the PayPal business email are missing, the button starts a PayPal invoice request through the contact form. After `price` and `paypalBusinessEmail` are filled in, the same button opens PayPal checkout for that artwork.
 
+The contact form sends through FormSubmit AJAX instead of opening the visitor's email app. The first live submission may require confirming an activation email sent to `mel.cormier@mail.com`.
+
 ## Shipping Rates
 
 The storefront currently shows Canada Post flat-rate box prices in CAD:

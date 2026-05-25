@@ -156,6 +156,7 @@ const galleryGrid = document.querySelector("#galleryGrid");
 const filterButtons = document.querySelectorAll(".filter-button");
 const modal = document.querySelector("#artModal");
 const contactForm = document.querySelector("#contactForm");
+const formStatus = document.querySelector("#formStatus");
 
 function formatPrice(price) {
   if (!price) return "Price available by request";
@@ -315,11 +316,47 @@ document.querySelector("#modalPaypal").addEventListener("click", (event) => {
 contactForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const formData = new FormData(contactForm);
-  const subject = encodeURIComponent("Acrylic abstract painting inquiry");
-  const body = encodeURIComponent(
-    `Name: ${formData.get("name")}\nEmail: ${formData.get("email")}\nInterested in: ${formData.get("interest")}\n\n${formData.get("message")}`
-  );
-  window.location.href = `mailto:${seller.email}?subject=${subject}&body=${body}`;
+  const submitButton = contactForm.querySelector("button[type='submit']");
+
+  if (formData.get("_honey")) return;
+
+  formStatus.className = "form-status";
+  formStatus.textContent = "Sending inquiry...";
+  submitButton.disabled = true;
+
+  const payload = {
+    name: formData.get("name"),
+    email: formData.get("email"),
+    interest: formData.get("interest"),
+    message: formData.get("message"),
+    _subject: formData.get("_subject"),
+    _template: "table",
+  };
+
+  fetch(`https://formsubmit.co/ajax/${seller.email}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => {
+      if (!response.ok) throw new Error("Form submission failed");
+      return response.json();
+    })
+    .then(() => {
+      contactForm.reset();
+      formStatus.className = "form-status success";
+      formStatus.textContent = "Inquiry sent. I will reply by email.";
+    })
+    .catch(() => {
+      formStatus.className = "form-status error";
+      formStatus.textContent = "The form could not send. Please email mel.cormier@mail.com directly.";
+    })
+    .finally(() => {
+      submitButton.disabled = false;
+    });
 });
 
 renderGallery();
