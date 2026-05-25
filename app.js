@@ -4,8 +4,6 @@ const seller = {
   currency: "CAD",
 };
 
-const inquiryEndpoint = `https://formsubmit.co/ajax/${seller.email}`;
-
 const artImages = [
   "20260523_133512.jpg",
   "20260523_133515.jpg",
@@ -201,15 +199,6 @@ function startPaypalInvoice(artwork) {
   );
 }
 
-async function formSubmitErrorMessage(response) {
-  try {
-    const data = await response.json();
-    return data.message || data.error || "Inquiry submission failed";
-  } catch (error) {
-    return "Inquiry submission failed";
-  }
-}
-
 function renderGallery(filter = "all") {
   galleryGrid.innerHTML = "";
   const visibleArt = artworks.filter((artwork) => filter === "all" || artwork.category === filter);
@@ -327,44 +316,31 @@ document.querySelector("#modalPaypal").addEventListener("click", (event) => {
   startPaypalInvoice(artwork);
 });
 
-contactForm.addEventListener("submit", async (event) => {
+contactForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const formData = new FormData(contactForm);
   const submitButton = contactForm.querySelector("button[type='submit']");
-  const defaultButtonText = submitButton.textContent;
 
   if (formData.get("_honey")) return;
 
   formStatus.className = "form-status";
-  formStatus.textContent = "Sending your inquiry...";
+  formStatus.textContent = "Opening your email app...";
   submitButton.disabled = true;
-  submitButton.textContent = "Sending...";
 
-  formData.set("_replyto", formData.get("email"));
+  const subject = formData.get("_subject") || "Acrylic abstract painting inquiry";
+  const body = [
+    `Name: ${formData.get("name")}`,
+    `Email: ${formData.get("email")}`,
+    `Interested in: ${formData.get("interest")}`,
+    "",
+    formData.get("message"),
+  ].join("\n");
+  const params = new URLSearchParams({ subject, body });
 
-  try {
-    const response = await fetch(inquiryEndpoint, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error(await formSubmitErrorMessage(response));
-    }
-
-    contactForm.reset();
-    formStatus.className = "form-status success";
-    formStatus.textContent = "Thanks, your inquiry has been sent.";
-  } catch (error) {
-    formStatus.className = "form-status error";
-    formStatus.textContent = "The inquiry service is temporarily unavailable. Please use PayPal checkout or email mel.cormier@mail.com directly.";
-  }
-
+  window.location.href = `mailto:${seller.email}?${params.toString()}`;
+  formStatus.className = "form-status success";
+  formStatus.textContent = "Your email app should open with the inquiry ready to send.";
   submitButton.disabled = false;
-  submitButton.textContent = defaultButtonText;
 });
 
 renderGallery();

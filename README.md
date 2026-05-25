@@ -36,7 +36,7 @@ Once a painting has a price and the PayPal email is updated, the PayPal button a
 
 Each artwork card includes a PayPal/card checkout action. While prices or the PayPal business email are missing, the button starts a PayPal invoice request through the contact form. After `price` and `paypalBusinessEmail` are filled in, the same button opens PayPal checkout for that artwork and asks PayPal to show the credit-card billing path when available.
 
-The contact form sends through FormSubmit AJAX instead of opening the visitor's email app. If FormSubmit is unavailable, the site keeps visitors on the page and shows a direct contact message instead of redirecting to the provider outage page. A dedicated backend or email API key is needed to make inquiry sending independent of FormSubmit.
+The contact form opens the visitor's email app with the inquiry filled in. The contact page also lists phone number `705-542-9682`.
 
 ## Shipping
 
